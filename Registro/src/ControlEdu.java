@@ -1,16 +1,18 @@
+import javax.swing.JOptionPane;
 
 public class ControlEdu {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int [] prueba = new int[5];
-		 
-		prueba[0]=85;
-		prueba[2]=20;
-		prueba[4]=10;
+		for( int x=0;x<5;x++) {
+			prueba [x]= Integer.parseInt(JOptionPane.showInputDialog("Ingrese el elemento "));
+		} 
+
 		
-		System.out.println ("prueba" +prueba[4]);
+		for (int i=0;i<5;i++) {
+			System.out.println (prueba[i]);}
+		}
 
 	}
 
-}
