@@ -187,12 +187,12 @@ public class Notas extends javax.swing.JPanel {
             
             Alumno alumno = Matricular.bst.searchDNI(dni).getData();	// se obtiene el alumno con el cual vamos a trabajar	
             
-            // PRE-CONDICIÓN
+            // PRE-CONDICIÓN: cada nota es de 0.0 a 20.0
             double nota1 = Double.parseDouble(row.get(2).toString());	// indico y almaceno 3er elemento de la fila
             double nota2 = Double.parseDouble(row.get(3).toString());
             double nota3 = Double.parseDouble(row.get(4).toString());
             double nota4 = Double.parseDouble(row.get(5).toString());
-            double notaFinal = nota1 + nota2 + nota3 + nota4;
+            double notaFinal = (nota1 + nota2 + nota3 + nota4)/4;
             
             
             CalificacionesMensuales nota = new CalificacionesMensuales("curso1", 0.0, 0.0, nota1, nota2, nota3, nota4, notaFinal);
@@ -211,8 +211,8 @@ public class Notas extends javax.swing.JPanel {
             notas.insertFirst(n0);
             notas.insertLast(n4);
             modelo.setValueAt(notaFinal, i, 6);			// Cambio el Elemento del campo 6 segun la fila 'i'
-            alumno.setNotas(notas);						// Actualiza con lo agregado
-            bst2.insert(alumno);						// Se pasan los valores de un arbol a otro
+            alumno.setNotas(notas);						// Se actualiza con lo agregado en la tabla
+            bst2.insert(alumno);						// Se pasan los valores del arbol original asignarlos a un arbol nuevo (donde se le inserta cada uno de los alumnos segun las iteraciones que se realicen en la fila)
             sumatoria = sumatoria + Double.parseDouble(modelo.getValueAt(i, 6).toString());	// sumatoria de fila '6'
 
                     

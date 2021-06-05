@@ -1,50 +1,110 @@
-//Hecho por: Yohan Hilpa Pérez / CRISTHIAN LUIS PUMACAYO GUTIERREZ
-import java.util.*;
+package Clases;
+
+// Hecho por: Adrian Valencia
+
 public class CalificacionesMensuales extends Calificaciones {
-	
-	private double tareas;						//	30%
-	private double examen;						//	50%
-	private double participaciones;				//	10%
-	private double asistencias;					//	10% //
-	private double notaMensual;					// 	100%
-	// Buscar la forma de establecer el porcentaje de la nota para cada criterio (tareas, examen, participaciones, asistencias, notaMensual)
-	// Curso y Estudiantes (variable donde cojo la info del Estudiante y asigno sus calificaciones)
-	public CalificacionesMensuales(String curso, double examen1, double examen2) {
-		super(curso, examen1, examen2);
-		Scanner sc = new Scanner(System.in);
-		this.tareas = sc.nextDouble();
-		this.examen = sc.nextDouble();
-		this.participaciones = sc.nextDouble();
-		this.asistencias = sc.nextDouble();
-		this.notaMensual = 0.0;
+	public double nota1;					// nota de tareas
+    public double nota2;					// nota de participaciones
+    public double nota3;					// nota de asistencias
+    public double nota4;					// nota de examen
+    public double notaFinal;
+    
+    public CalificacionesMensuales(String curso, double ex1, double ex2, double nota1, double nota2, double nota3, double nota4, double notaFinal){
+    	super(curso, ex1, ex2);
+        this.nota1 = nota1;
+        this.nota2 = nota2;
+        this.nota3 = nota3;
+        this.nota4 = nota4;
+        this.notaFinal = notaFinal;
+    }
+
+    public double getNota1() {
+        return nota1;
+    }
+
+    public void setNota1(double nota1) {
+        this.nota1 = nota1;
+    }
+
+    public double getNota2() {
+        return nota2;
+    }
+
+    public void setNota2(double nota2) {
+        this.nota2 = nota2;
+    }
+
+    public double getNota3() {
+        return nota3;
+    }
+
+    public void setNota3(double nota3) {
+        this.nota3 = nota3;
+    }
+
+    public double getNota4() {
+        return nota4;
+    }
+
+    public void setNota4(double nota4) {
+        this.nota4 = nota4;
+    }
+
+    public double getNotaFinal() {
+        double notaFinal = getNota1() + getNota2() + getNota3() + getNota4();
+        return notaFinal;
+    }
+
+    public void setNotaFinal(double notaFinal) {
+        this.notaFinal = notaFinal;
+    }
+    
+    public double calcularNotaBimestre() {
+		return (this.getNotaFinal() + this.getNotaFinal())/2;
 	}
 	
-	public double calcularNotaMensual() {
-		return this.notaMensual = (this.tareas + this.examen + this.participaciones + this.asistencias);
+	public double calcularNotaFinal() {
+		return (this.calcularNotaBimestre()+this.calcularNotaBimestre()+this.calcularNotaBimestre()+this.calcularNotaBimestre())/4;
 	}
 	
-	public double calcularNotaBimestral() {
-		return this.calcularNotaMensual();
-		// if (this.notalFinal > 12.0 && .notalFinal > 20.0)
-		// return ((this.getExamenMensual() + this.getExamenBimestral()/2.0)); 
-	}
-	
-	public void mostrarResultado(double notaMensual) {
-		if (12.0 <= notaMensual && notaMensual <= 20.0)
+	public void resultadoNotas(double nota) {
+		if (12.0 <= nota && nota <= 20.0)
 			System.out.println("APROBADO...");
-		else if (0.0 <= notaMensual && notaMensual < 12.0) 
+		else if (0.0 <= nota && nota < 12.0) 
 			System.out.println("DESAPROBADO...");
 		else 
-			System.out.println("Mal calculo de la Nota Mensual");
+			System.out.println("La nota ingresada, ha sido mal hallada... ");
 	}
 	
-	public String toString() {
-		return super.toString() + "\n" +
-				"Nota Mensual: " + this.calcularNotaMensual() +
-				"Nota Bimestral: " + this.calcularNotaBimestral();
+
+	@Override
+	public void resultadoExamMens() {
+		if (12.0 <= this.getExamenMensual() && this.getExamenMensual() <=20) {
+			System.out.println("El resultado de su examen es... "
+					+ "APROBATORIO ");
+			System.out.println("La nota de su examen fue: " + this.getExamenMensual());
+		}
+		else if (0.0 <= this.getExamenMensual() && this.getExamenMensual() < 12.0) {
+			System.out.println("El resultado de su examen es... "
+					+ "DESAPROBATORIO ");
+			System.out.println("La nota de su examen fue: " + this.getExamenMensual());
+		}		
 	}
-	
-	public double obtenerPromedioBimestre() {
-		return (this.getExamenMensual() + this.getExamenBimestral())/2.0;
+
+	@Override
+	public void resultadoExamBimes() {
+		if (12.0 <= this.getExamenBimestral() && this.getExamenBimestral() <=20) {
+			System.out.println("El resultado de su examen es... "
+					+ "APROBATORIO ");
+			System.out.println("La nota de su examen fue: " + this.getExamenBimestral());
+
+		}
+		else if (0.0 <= this.getExamenBimestral() && this.getExamenBimestral() < 12.0) {
+			System.out.println("El resultado de su examen es... "
+					+ "DESAPROBATORIO ");
+			System.out.println("La nota de su examen fue: " + this.getExamenBimestral());
+
+		}		
 	}
+
 }
