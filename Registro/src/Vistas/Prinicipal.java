@@ -8,13 +8,12 @@ import EstructuraDatos.BST.BST;
 
 /**
  *
- * @author Adrian Valencia			Support: Betsy Vargas
+ * @author Betsy Vargas 	
  */
 public class Prinicipal extends javax.swing.JFrame {
     Estudiantes pEstudiantes;
-    Asistencia pNotas;
-    Asistencia pAsistencia;
-    Asistencia pProfesor;
+    Notas pNotas;
+    RegistrarProfesor pProfesor;
     
     /**
      * Creates new form Prinicipal
@@ -87,16 +86,19 @@ public class Prinicipal extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    public static void llamar(){			
+        Notas pNotas = new Notas();
+    }
     private void agregarPestañas() {
         Estudiantes pEstudiantes = new Estudiantes();
         Notas pNotas = new Notas();
-        Asistencia pAsistencia = new Asistencia();
-        Profesor pProfesor = new Profesor();
+        RegistrarProfesor pProfesor = new RegistrarProfesor();
         
         
         jTabbedPane.add("Estudiantes", pEstudiantes);
         jTabbedPane.add("Notas", pNotas);
-        jTabbedPane.add("Asistencia", pAsistencia);
         jTabbedPane.add("Profesor", pProfesor);
         
         jTabbedPane.setSelectedComponent(pEstudiantes);

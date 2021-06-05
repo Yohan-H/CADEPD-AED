@@ -7,7 +7,7 @@ package Vista;
 
 /**
  *
- * @author: Cristhian Pumacayo		
+ * @author 	Cristhian Pumacayo
  */
 public class Estudiantes extends javax.swing.JPanel {
 

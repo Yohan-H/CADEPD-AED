@@ -6,25 +6,47 @@
 package Vista;
 import Clases.Alumno;
 import EstructuraDatos.BST.BST;
-import Vista.Prinicipal;
+import EstructuraDatos.ListLinked.ListLinked;
+import EstructuraDatos.ListLinked.Node;
+import Clases.CalificacionesMensuales;
+//import Vista.Prinicipal;
+import Vista.Notas;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author Yohan Hilpa				Support: Adrian Valencia
+ * @author Cristhian Pumacayo			
  */
 public class Matricular extends javax.swing.JPanel {
 
     public static BST bst = new BST();
+    public static ListLinked notas;
     /**
      * Creates new form Matricular
      */
     public Matricular() {
         initComponents();
         
-        ArrayList<Object> notas = new ArrayList<Object>();
+       
+        CalificacionesMensuales nota = new CalificacionesMensuales("", 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        
+        ListLinked notas = new ListLinked();
+        
+        Node n4 = new Node(nota);
+        Node n3 = new Node(nota, n4);
+        Node n2 = new Node(nota, n3);
+        Node n1 = new Node(nota, n2);
+        Node n0 = new Node(nota);
+                
+        notas.insertFirst(n3);
+        notas.insertFirst(n2);
+        notas.insertFirst(n1);
+        notas.insertFirst(n0);
+        notas.insertLast(n4);
+        
+        System.out.println(notas.getFirst().getData());
+        nota = (CalificacionesMensuales) notas.getFirst().getData();
+        System.out.println(nota.getNotaFinal());
         
         Alumno alumno1 = new Alumno("Harriet McKenzie", "Burns", "Rosario", 80706640, "935379210", "Apartado nÃºm.: 387, 6573 Sed Calle", notas);
         Alumno alumno2 = new Alumno("Tyler Emerald", "Mcconnell", "Reilly", 76485967, "978537996", "158-4934 Arcu Av.", notas);
@@ -43,6 +65,8 @@ public class Matricular extends javax.swing.JPanel {
         bst.insert(alumno6);
         bst.insert(alumno7);
         bst.insert(alumno8);
+        
+        //bst.preOrden();
     }
 
     /**
@@ -80,9 +104,9 @@ public class Matricular extends javax.swing.JPanel {
 
         jLabel5.setText("DNI:");
 
-        jLabel6.setText("NÃºmero de celular:");
+        jLabel6.setText("Número de celular:");
 
-        jLabel7.setText("DirecciÃ³n:");
+        jLabel7.setText("Dirección:");
 
         tfNombreCompleto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,6 +242,26 @@ public class Matricular extends javax.swing.JPanel {
     }//GEN-LAST:event_tfDireccionActionPerformed
 
     private void bMatricularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMatricularActionPerformed
+        
+    	CalificacionesMensuales nota = new CalificacionesMensuales("", 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        
+        ListLinked notas = new ListLinked();
+        
+        Node n4 = new Node(nota);
+        Node n3 = new Node(nota, n4);
+        Node n2 = new Node(nota, n3);
+        Node n1 = new Node(nota, n2);
+        Node n0 = new Node(nota);
+                
+        notas.insertFirst(n3);
+        notas.insertFirst(n2);
+        notas.insertFirst(n1);
+        notas.insertFirst(n0);
+        notas.insertLast(n4);
+        
+        System.out.println(notas.getFirst().getData());
+        nota = (CalificacionesMensuales) notas.getFirst().getData();
+        
         String nombreCompleto = tfNombreCompleto.getText();
         String primerApellido = tfPrimerApellido.getText();
         String segundoApellido = tfSegundoApellido.getText();
@@ -225,12 +269,42 @@ public class Matricular extends javax.swing.JPanel {
         String celular = tfCelular.getText();
         String direccion = tfDireccion.getText();
 
-        ArrayList<Object> notas = new ArrayList<Object>();
+        
+        
+        //ArrayList<Object> notas = new ArrayList<Object>();
         
         Alumno alumno = new Alumno(nombreCompleto, primerApellido, segundoApellido, dni, celular, direccion, notas);
         bst.insert(alumno);
         bst.preOrden();
+        /*
+        String campo1 = primerApellido + " " + segundoApellido + ", " + nombreCompleto;
+        int campo2 = 0;
+        int campo3 = 0;
+        int campo4 = 0;
+        int campo5 = 0;
+        int campo6 = 0;
+        */
+        String campo0 = Integer.toString(alumno.getDNI());
+        String campo1 = primerApellido + " " + segundoApellido + ", " + nombreCompleto;
+        System.out.println(campo1);
+        //System.out.println(alumnos.get(i).getNota1());
+
+        double campo2 = alumno.getNota1();
+        System.out.println(campo2);
+        double campo3 = alumno.getNota2();
+        System.out.println(campo3);
+        double campo4 = alumno.getNota3();
+        System.out.println(campo4);
+        double campo5 = alumno.getNota4();
+        System.out.println(campo5);
+        double campo6 = alumno.getNotaFinal();
+        System.out.println(campo6);
+
+        String[] row = {campo0, campo1, String.valueOf(campo2), String.valueOf(campo3), String.valueOf(campo4), String.valueOf(campo5), String.valueOf(campo6)};
         
+        //Object[] row = {campo1, campo2, campo3, campo4, campo5, campo6};
+        
+        Notas.modelo.addRow(row);
         
         /*
         //Alumno alumno1 = new Alumno(nombreCompleto, primerApellido, segundoApellido, dni, celular, "asdas", notas);

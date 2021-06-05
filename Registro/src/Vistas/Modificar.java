@@ -6,10 +6,13 @@
 package Vista;
 import Vista.Matricular;
 import EstructuraDatos.BST.BST;
+import Clases.Alumno;
+
+import java.util.*;
 
 /**
  *
- * @author Cristhian Pumacayo		Support: Yohan Hilpa
+ * @author Cristhian Pumacayo		Yohan Hilpa
  */
 public class Modificar extends javax.swing.JPanel {
 
@@ -18,7 +21,7 @@ public class Modificar extends javax.swing.JPanel {
      */
     public Modificar() {
         initComponents();
-        
+        limpiarCasillas();
     }
 
     /**
@@ -31,30 +34,30 @@ public class Modificar extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        bBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        tfDNI = new javax.swing.JTextField();
+        tfDNIBuscar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        tfPrimerApellido = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        tfSegundoApellido = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        tfDNI = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        tfCelular = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        tfDireccion = new javax.swing.JTextField();
+        bEliminar = new javax.swing.JButton();
         tfNombreCompleto = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        bModificar = new javax.swing.JButton();
 
         jLabel2.setText("DNI:");
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bBuscar.setText("Buscar");
+        bBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bBuscarActionPerformed(evt);
             }
         });
 
@@ -63,56 +66,56 @@ public class Modificar extends javax.swing.JPanel {
 
         jLabel3.setText("Nombre completo:");
 
+        tfDNIBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfDNIBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Primer Apellido:");
+
+        tfPrimerApellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPrimerApellidoActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Segundo Apellido:");
+
+        tfSegundoApellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfSegundoApellidoActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("DNI:");
+
         tfDNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfDNIActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Primer Apellido:");
+        jLabel7.setText("Número de celular:");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        tfCelular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                tfCelularActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("SegundoApellido:");
+        jLabel8.setText("Dirección:");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        tfDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                tfDireccionActionPerformed(evt);
             }
         });
 
-        jLabel6.setText("DNI:");
-
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        bEliminar.setText("Eliminar");
+        bEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("NÃºmero de celular:");
-
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("DirecciÃ³n:");
-
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                bEliminarActionPerformed(evt);
             }
         });
 
@@ -122,10 +125,10 @@ public class Modificar extends javax.swing.JPanel {
             }
         });
 
-        jButton4.setText("Modificar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        bModificar.setText("Modificar");
+        bModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                bModificarActionPerformed(evt);
             }
         });
 
@@ -137,7 +140,7 @@ public class Modificar extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(107, 107, 107)
-                        .addComponent(jButton1))
+                        .addComponent(bBuscar))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +148,7 @@ public class Modificar extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(128, 128, 128)
-                                .addComponent(tfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tfDNIBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -158,16 +161,16 @@ public class Modificar extends javax.swing.JPanel {
                                             .addComponent(jLabel8))
                                         .addGap(50, 50, 50))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jButton4)
+                                        .addComponent(bModificar)
                                         .addGap(31, 31, 31)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfSegundoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfPrimerApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton3))))))
+                                    .addComponent(bEliminar))))))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -176,9 +179,9 @@ public class Modificar extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(tfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfDNIBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(bBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -188,81 +191,129 @@ public class Modificar extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfPrimerApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfSegundoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(bEliminar)
+                    .addComponent(bModificar))
                 .addContainerGap(122, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
         // TODO add your handling code here:
-        int dni = Integer.parseInt(tfDNI.getText());
-        BST alumno = Matricular.bst.searchDNI(dni);
+        //tfDNIBuscar.setText("");
+        
+        int dniBuscar = Integer.parseInt(tfDNIBuscar.getText());
+        BST alumno = Matricular.bst.searchDNI(dniBuscar);
+        
         String nombreCompleto = alumno.getData().getNombreCompleto();
+        String primerApellido  = alumno.getData().getPrimerApellido();
+        String segundoApellido = alumno.getData().getSegundoApellido();
+        Integer dni  = (alumno.getData().getDNI());
+        String celular  = alumno.getData().getCelular();
+        String direccion  = alumno.getData().getDireccion();
+        
         tfNombreCompleto.setText(nombreCompleto);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        tfPrimerApellido.setText(primerApellido);
+        tfSegundoApellido.setText(segundoApellido);
+        tfDNI.setText(dni.toString());
+        tfCelular.setText(celular);
+        tfDireccion.setText(direccion);
+        
+        //tfDNIBuscar.setText("");
+    }//GEN-LAST:event_bBuscarActionPerformed
+
+    private void tfDNIBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDNIBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDNIBuscarActionPerformed
+
+    private void tfPrimerApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPrimerApellidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfPrimerApellidoActionPerformed
+
+    private void tfSegundoApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSegundoApellidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfSegundoApellidoActionPerformed
 
     private void tfDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDNIActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfDNIActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void tfCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCelularActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_tfCelularActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void tfDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDireccionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_tfDireccionActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        int dniBuscar = Integer.parseInt(tfDNIBuscar.getText());
+        BST alumno = Matricular.bst.searchDNI(dniBuscar);
+        
+        Alumno a = alumno.getData();
+        
+        Matricular.bst.remove(a);
+        Matricular.bst.preOrden();
+    }//GEN-LAST:event_bEliminarActionPerformed
 
     private void tfNombreCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombreCompletoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfNombreCompletoActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    public void limpiarCasillas(){
+        tfNombreCompleto.setText("");
+        tfPrimerApellido.setText("");
+        tfSegundoApellido.setText("");
+        tfDNI.setText("");
+        tfCelular.setText("");
+        tfDireccion.setText("");
+    }
+    
+    private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        int dniBuscar = Integer.parseInt(tfDNIBuscar.getText());
+        BST alumno = Matricular.bst.searchDNI(dniBuscar);
+        
+        String nombreCompleto = tfNombreCompleto.getText();
+        String primerApellido = tfPrimerApellido.getText();
+        String segundoApellido = tfSegundoApellido.getText();
+        int dni = Integer.parseInt(tfDNI.getText());
+        String celular = tfCelular.getText();
+        String direccion = tfDireccion.getText();
+        
+        //ArrayList<Object> notas = alumno.getData().getNotas();
+        
+        Alumno alumnoModificado = new Alumno(nombreCompleto, primerApellido, segundoApellido, dni, celular, direccion, Matricular.notas);
+        alumno.setData(alumnoModificado);
+        
+        limpiarCasillas();
+        Matricular.bst.preOrden();
+    }//GEN-LAST:event_bModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton bBuscar;
+    private javax.swing.JButton bEliminar;
+    private javax.swing.JButton bModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -271,12 +322,12 @@ public class Modificar extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField tfCelular;
     private javax.swing.JTextField tfDNI;
+    private javax.swing.JTextField tfDNIBuscar;
+    private javax.swing.JTextField tfDireccion;
     private javax.swing.JTextField tfNombreCompleto;
+    private javax.swing.JTextField tfPrimerApellido;
+    private javax.swing.JTextField tfSegundoApellido;
     // End of variables declaration//GEN-END:variables
 }
