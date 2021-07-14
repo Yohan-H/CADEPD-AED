@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Vista;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Vista.Matricular;
 import EstructuraDatos.BST.BST;
@@ -19,7 +20,7 @@ import EstructuraDatos.ListLinked.Node;
  *
  * @author Adrian Valencia Sacatuma
  */
-public class Notas extends javax.swing.JPanel {
+public class Notas<E> extends javax.swing.JPanel {
     public static DefaultTableModel modelo;
     Vector<Object> vector = new Vector<>();				// Generico
     DefaultTableModel modelo2;
@@ -178,32 +179,54 @@ public class Notas extends javax.swing.JPanel {
     private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
         sumatoria = 0;
         cantidad = 0;
-        BST bst2 = new BST();
+        BST<E> bst2 = new BST<E>();
+        boolean val1, val2, val3, val4;
+        double nota1, nota2, nota3, nota4;
         
         Vector<Vector> vector2 = modelo.getDataVector();		// obtengo todo lo que tiene la tabla (excepto la fila de las columnas)
         for (int i = 0; i < vector2.size(); i++){				
             Vector row = (Vector) vector2.get(i);				// En cada iteración, cada fila se guarda en 1 row
             int dni = Integer.parseInt((String) row.get(0));
             
-            Alumno alumno = Matricular.bst.searchDNI(dni).getData();	// se obtiene el alumno con el cual vamos a trabajar	
+            Alumno alumno = Matricular.bst.searchDNI(dni).getData();	// se obtiene el alumno con el cual vamos a trabajar
+            
             
             // PRE-CONDICIÓN: cada nota es de 0.0 a 20.0
-            double nota1 = Double.parseDouble(row.get(2).toString());	// indico y almaceno 3er elemento de la fila
-            double nota2 = Double.parseDouble(row.get(3).toString());
-            double nota3 = Double.parseDouble(row.get(4).toString());
-            double nota4 = Double.parseDouble(row.get(5).toString());
+            nota1 = Double.parseDouble(row.get(2).toString());	// indico y almaceno 3er elemento de la fila
+            val1 = validarNota(nota1);
+            if (val1 == false) {
+            	JOptionPane.showMessageDialog(null, "Nota ingresada no esta entre el rango de 0 a 20");            	
+            	return;
+            }
+            nota2 = Double.parseDouble(row.get(3).toString());
+            val2 = validarNota(nota2);
+            if (val2 == false) {
+            	JOptionPane.showMessageDialog(null, "Nota ingresada no esta entre el rango de 0 a 20");
+            	return;
+            }
+            nota3 = Double.parseDouble(row.get(4).toString());
+            val3 = validarNota(nota3);
+            if (val3 == false) {
+            	JOptionPane.showMessageDialog(null, "Nota ingresada no esta entre el rango de 0 a 20");
+            	return;
+            }
+            nota4 = Double.parseDouble(row.get(5).toString());
+            val4 = validarNota(nota4);
+            if (val4 == false) {
+            	JOptionPane.showMessageDialog(null, "Nota ingresada no esta entre el rango de 0 a 20");
+            	return;
+            }
             double notaFinal = (nota1 + nota2 + nota3 + nota4)/4;
-            
             
             CalificacionesMensuales nota = new CalificacionesMensuales("curso1", 0.0, 0.0, nota1, nota2, nota3, nota4, notaFinal);
             
-            ListLinked notas = new ListLinked();		// Para almacenar esas notas en nodos
+            ListLinked<E> notas = new ListLinked<E>();		// Para almacenar esas notas en nodos
         
-            Node n4 = new Node(nota);
-            Node n3 = new Node(nota, n4);
-            Node n2 = new Node(nota, n3);
-            Node n1 = new Node(nota, n2);
-            Node n0 = new Node(nota);
+            Node<E> n4 = new Node(nota);
+            Node<E> n3 = new Node(nota, n4);
+            Node<E> n2 = new Node(nota, n3);
+            Node<E> n1 = new Node(nota, n2);
+            Node<E> n0 = new Node(nota);
 
             notas.insertFirst(n3);
             notas.insertFirst(n2);
@@ -233,6 +256,27 @@ public class Notas extends javax.swing.JPanel {
         lPromedio.setText(String.valueOf(sumatoria / cantidad));		// cambiar de resultado del Promedio y de la Nota Maxima
         lMaxima.setText(String.valueOf(mayor));
     }//GEN-LAST:event_bModificarActionPerformed
+    
+    /*
+    public void actionPerformed(ActionEvent e) {
+    	boolean v = se
+    }
+    */
+    public static boolean validation(String cad) {
+    	double num = Double.parseDouble(cad);
+    	if (0.0 <= num && num <= 9999999.99)
+    		return true;
+    	return false;
+    }
+    
+    public static boolean validarNota(double nota) {
+    	if (0.0 <= nota && nota <= 20.0) {
+    		return true;
+    	}
+    	return false;
+    	
+    	
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

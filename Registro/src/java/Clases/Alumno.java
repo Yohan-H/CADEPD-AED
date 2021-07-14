@@ -7,7 +7,7 @@ import java.util.*;
 
 // Hecho por: Cristhian Pumacayo
 
-public class Alumno {
+public class Alumno implements Comparable<Alumno>{
     public String nombreCompleto;
     public String primerApellido;
     public String segundoApellido;
@@ -27,6 +27,15 @@ public class Alumno {
    }
    public Alumno(Alumno data){
        this.nombreCompleto = data.getNombreCompleto();
+   }
+   
+   public Alumno(int dni, String nombreCompleto, String primerApellido, String segundoApellido, ListLinked notas) {
+	   this.dni = dni;
+	   this.nombreCompleto = nombreCompleto;
+	   this.primerApellido = primerApellido;
+	   this.segundoApellido = segundoApellido;
+	   this.notas = notas;
+	   
    }
 
     @Override
@@ -127,4 +136,8 @@ public class Alumno {
     public void setNotaFinal(double nota){
         notas.getLast().setData(nota);
     }
+	@Override
+	public int compareTo(Alumno o) {
+		return this.dni - o.dni;
+	}
 }

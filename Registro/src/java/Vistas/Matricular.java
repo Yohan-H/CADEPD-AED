@@ -8,19 +8,27 @@ import Clases.Alumno;
 import EstructuraDatos.BST.BST;
 import EstructuraDatos.ListLinked.ListLinked;
 import EstructuraDatos.ListLinked.Node;
+import Hashing.Hashing;
 import Clases.CalificacionesMensuales;
 //import Vista.Prinicipal;
 import Vista.Notas;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Cristhian Pumacayo			
+ * @param <E>
  */
-public class Matricular extends javax.swing.JPanel {
+public class Matricular<E> extends javax.swing.JPanel {
 
     public static BST bst = new BST();
     public static ListLinked notas;
+    
+    // HASHING EN EL PROYECTO
+    public static Hashing hashA = new Hashing(20,false); 
+    
     /**
      * Creates new form Matricular
      */
@@ -30,13 +38,13 @@ public class Matricular extends javax.swing.JPanel {
        
         CalificacionesMensuales nota = new CalificacionesMensuales("", 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
         
-        ListLinked notas = new ListLinked();
+        ListLinked<E> notas = new ListLinked<E>();
         
-        Node n4 = new Node(nota);
-        Node n3 = new Node(nota, n4);
-        Node n2 = new Node(nota, n3);
-        Node n1 = new Node(nota, n2);
-        Node n0 = new Node(nota);
+        Node<E> n4 = new Node(nota);
+        Node<E> n3 = new Node(nota, n4);
+        Node<E> n2 = new Node(nota, n3);
+        Node<E> n1 = new Node(nota, n2);
+        Node<E> n0 = new Node(nota);
                 
         notas.insertFirst(n3);
         notas.insertFirst(n2);
@@ -244,7 +252,9 @@ public class Matricular extends javax.swing.JPanel {
     private void bMatricularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMatricularActionPerformed
         
     	CalificacionesMensuales nota = new CalificacionesMensuales("", 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        
+        boolean val;
+    	
+    	
         ListLinked notas = new ListLinked();
         
         Node n4 = new Node(nota);
@@ -266,7 +276,17 @@ public class Matricular extends javax.swing.JPanel {
         String primerApellido = tfPrimerApellido.getText();
         String segundoApellido = tfSegundoApellido.getText();
         int dni = Integer.parseInt(tfDNI.getText());
+        val = validarDNI(dni);
+        if (val == false) {
+        	JOptionPane.showMessageDialog(null, "el DNI que usted ingreso, no es correcto");
+        	return;
+        }
         String celular = tfCelular.getText();
+        val = validaCel(celular);
+        if (val == false) {
+        	JOptionPane.showMessageDialog(null, "el Numero de Celular que usted ingreso, no es correcto");
+        	return;
+        }
         String direccion = tfDireccion.getText();
 
         
@@ -276,6 +296,13 @@ public class Matricular extends javax.swing.JPanel {
         Alumno alumno = new Alumno(nombreCompleto, primerApellido, segundoApellido, dni, celular, direccion, notas);
         bst.insert(alumno);
         bst.preOrden();
+        
+        hashA.insert(dni, nombreCompleto, primerApellido, segundoApellido, notas);
+        System.out.println(hashA);
+        
+        System.out.print("\n");
+        hashA.search(dni);
+        
         /*
         String campo1 = primerApellido + " " + segundoApellido + ", " + nombreCompleto;
         int campo2 = 0;
@@ -315,6 +342,23 @@ public class Matricular extends javax.swing.JPanel {
         */
     }//GEN-LAST:event_bMatricularActionPerformed
 
+    
+    private boolean validaCel(String celular) {
+    	double cel = Double.parseDouble(celular);
+    	if (0 <= cel && cel <= 999999999) {
+    		return true;
+    	}
+    	return false;
+	}
+
+	private static boolean validarDNI(int dni) {
+    	if (0 <= dni && dni <= 99999999) {
+    		return true;
+    	}
+    	return false;
+    	
+    	
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bMatricular;
