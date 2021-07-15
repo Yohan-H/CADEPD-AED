@@ -39,7 +39,7 @@ public class Notas<E> extends javax.swing.JPanel {
     private void actualizar(){
         agregar();
         tNotas.setModel(modelo);
-        ArrayList<Alumno> alumnos = Matricular.bst.recorrer();
+        ArrayList<Alumno> alumnos = Matricular.bstAlumnos.recorrer();
         for (int i = 0; i < alumnos.size(); i++){
             String nombreCompleto = alumnos.get(i).getNombreCompleto();			// Obtener principales datos de Alumnos
             String primerApellido = alumnos.get(i).getPrimerApellido();
@@ -188,7 +188,7 @@ public class Notas<E> extends javax.swing.JPanel {
             Vector row = (Vector) vector2.get(i);				// En cada iteración, cada fila se guarda en 1 row
             int dni = Integer.parseInt((String) row.get(0));
             
-            Alumno alumno = Matricular.bst.searchDNI(dni).getData();	// se obtiene el alumno con el cual vamos a trabajar
+            Alumno alumno = Matricular.bstAlumnos.searchDNI(dni).getData();	// se obtiene el alumno con el cual vamos a trabajar
             
             
             // PRE-CONDICIÓN: cada nota es de 0.0 a 20.0
@@ -248,8 +248,8 @@ public class Notas<E> extends javax.swing.JPanel {
             }
             
         }
-        Matricular.bst = bst2;
-        Matricular.bst.preOrden();
+        Matricular.bstAlumnos = bst2;
+        Matricular.bstAlumnos.preOrden();
         //actualizar2();
         //Principal.llamar();
         Prinicipal principal = new Prinicipal();

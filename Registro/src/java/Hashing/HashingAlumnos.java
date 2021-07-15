@@ -2,17 +2,18 @@ package Hashing;
 
 import java.util.ArrayList;
 import Clases.Alumno;
+import EstructuraDatos.BST.BST;
 import EstructuraDatos.ListLinked.ListLinked;
 
-public class Hashing {
+public class HashingAlumnos {
 	ArrayList<Alumno> tabla;
-	ArrayList<LinkedList<Alumno>> listAlumnos;
-	ListLinked notas;
+	ArrayList<BST<Alumno>> bstListAlumnos;
+	//ListLinked notas;
 	int m;
 	boolean tipo;
 	
 	// Constructor
-	public Hashing(int a,boolean tipo) {
+	public HashingAlumnos(int a,boolean tipo) {
 		this.tipo = tipo;	// True: Direccionamiento Abierto | False: Encadenamiento
 		inicializador(a, tipo);
 	}
@@ -55,14 +56,14 @@ public class Hashing {
 	// Inserción en Encadenamiento
 	private void insertNodeList(String nombre,int dni, String priApellido, String secApellido, ListLinked notas) {
 		int f = funcionHash(dni);
-		listAlumnos.get(f).insert(new Alumno(dni, nombre, priApellido, secApellido, notas));
-		System.out.println("Se inserto el elemento: " + listAlumnos.get(f));
+		bstListAlumnos.get(f).insert(new Alumno(dni, nombre, priApellido, secApellido, notas));
+		System.out.println("Se inserto el elemento: " + bstListAlumnos.get(f));
 	}
 	
 	// Busqueda en Encadenamiento
 	private void searchNodeList(int dni) {
 		int f = funcionHash(dni);
-		String aux = listAlumnos.get(f).search(new Alumno(dni,"", "", "",null));
+		BST aux = bstListAlumnos.get(f).searchDNI(dni);
 		if (aux != null) 
 			System.out.println(aux + " Se encuentra en la posicion " + f);
 		else 
@@ -73,7 +74,7 @@ public class Hashing {
 	// Eliminación en Encadenamiento
 	private void removeNodeList(int dni) {
 		int f = funcionHash(dni);
-		listAlumnos.get(f).deleteNode(new Alumno(dni,"", "", "",null));
+		bstListAlumnos.get(f).remove(new Alumno(dni,"", "", "",null));
 	}
 	
 	private void removeTrue(int codigo) {
@@ -119,16 +120,16 @@ public class Hashing {
 	private void inicializador(int a,boolean tipo) {
 		if (tipo==true) {
 			m = nuevoM(a);			
-			tabla=new ArrayList<Alumno>(m);
+			tabla = new ArrayList<Alumno>(m);
 			for (int i=0;i < m;i++) {
 				tabla.add(null);
 			}
 		}
 		else {	// Inicializando Tabla de Hash basada en Encadenamiento
 			m = a;
-			listAlumnos = new ArrayList<LinkedList<Alumno>>(m);
+			bstListAlumnos = new ArrayList<BST<Alumno>>(m);
 			for (int i = 0; i < m ; i++) {
-				listAlumnos.add(new LinkedList<Alumno>());
+				bstListAlumnos.add(new BST<Alumno>());
 			}
 		
 		}
@@ -178,15 +179,14 @@ public class Hashing {
 	// toString() para mostrar Elementos de una Tabla basada en Encadenamiento
 	public String toSLinkedList() {
 		String cadena="\n| D.REAL\t | \tElementos\t \n";
-		for (int i = 0; i < listAlumnos.size(); i++) {
+		for (int i = 0; i < bstListAlumnos.size(); i++) {
 			cadena += i + "\t\t ==> \t";
-			if (listAlumnos.get(i).isEmpty())
+			if (bstListAlumnos.get(i).isEmpty())
 				cadena += "empty";
 			else 
-				cadena += listAlumnos.get(i).toString();
+				cadena += bstListAlumnos.get(i).toString();
 			cadena += "\n";
 		}
 		return cadena;
 	}
-
 }

@@ -7,6 +7,10 @@ package Vista;
 
 import EstructuraDatos.ListLinked.ListLinked;
 import EstructuraDatos.ListLinked.Node;
+import Hashing.HashingProfesores;
+
+import javax.swing.JOptionPane;
+
 import Clases.Profesor;
 
 /**
@@ -14,7 +18,10 @@ import Clases.Profesor;
  * @author Yohan Hilpa
  */
 public class RegistrarProfesor extends javax.swing.JPanel {
-    public static ListLinked listLinked = new ListLinked();
+    public static ListLinked listLinkedProf = new ListLinked();
+    
+    // HASHING PARA GUARDAR Y ORGANIZAR PROFESORES
+    public static HashingProfesores hashP = new HashingProfesores(20,false);
     
     Profesor profesor1 = new Profesor("Harriet McKenzie", "Burns", "Rosario", 80706640, "935379210", "Apartado núm.: 387, 6573 Sed Calle", "Curso1");
     Profesor profesor2 = new Profesor("Tyler Emerald", "Mcconnell", "Reilly", 76485967, "978537996", "158-4934 Arcu Av.", "Curso1");
@@ -30,10 +37,10 @@ public class RegistrarProfesor extends javax.swing.JPanel {
     public RegistrarProfesor() {
         initComponents();
         
-        listLinked.insertFirst(n3);
-        listLinked.insertFirst(n2);
-        listLinked.insertFirst(n1);
-        listLinked.insertLast(n4);
+        listLinkedProf.insertFirst(n3);
+        listLinkedProf.insertFirst(n2);
+        listLinkedProf.insertFirst(n1);
+        listLinkedProf.insertLast(n4);
         
         //listLinked.toString1();
         
@@ -45,9 +52,9 @@ public class RegistrarProfesor extends javax.swing.JPanel {
         mostrarUltimo();
     }
     public void mostrarUltimo(){
-        Profesor ultimoProfesor = (Profesor) listLinked.getLast().getData();
+        Profesor ultimoProfesor = (Profesor) listLinkedProf.getLast().getData();
 
-        System.out.println("Último Profesor: " + ultimoProfesor.toString());
+        System.out.println("�ltimo Profesor: " + ultimoProfesor.toString());
         
         tfNombreCompleto.setText(ultimoProfesor.getNombreCompleto());
         tfPrimerApellido.setText(ultimoProfesor.getPrimerApellido());
@@ -252,22 +259,60 @@ public class RegistrarProfesor extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfCursoActionPerformed
 
+    
     private void bRegistrarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRegistrarProfesorActionPerformed
+    	
+    	boolean val;
         String nombreCompleto = tfNombreCompleto.getText();
         String primerApellido = tfPrimerApellido.getText();
         String segundoApellido = tfSegundoApellido.getText();
         int DNI = Integer.parseInt(tfDNI.getText());
+        val = validarDNI(DNI);
+        if (val == false) {
+        	JOptionPane.showMessageDialog(null, "el DNI que usted ingreso, no es correcto");
+        	return;
+        }
         String celular = tfCelular.getText();
+        val = validaCel(celular);
+        if (val == false) {
+        	JOptionPane.showMessageDialog(null, "el Numero de Celular que usted ingreso, no es correcto");
+        	return;
+        }
         String direccion = tfDireccion.getText();
         String curso = tfCurso.getText();
         
         Profesor nuevoProfesor = new Profesor(nombreCompleto, primerApellido, segundoApellido, DNI, celular, direccion, curso);
         
+        hashP.insert(DNI, nombreCompleto, primerApellido, segundoApellido, curso);
+        System.out.println(hashP);
+        
+        System.out.println("\n");
+        hashP.search(DNI);
+        
+        
         addNodes(nuevoProfesor);
     }//GEN-LAST:event_bRegistrarProfesorActionPerformed
+    
+    private boolean validaCel(String celular) {
+    	double cel = Double.parseDouble(celular);
+    	if (0 <= cel && cel <= 999999999) {
+    		return true;
+    	}
+    	return false;
+	}
+
+	private static boolean validarDNI(int dni) {
+    	if (0 <= dni && dni <= 99999999) {
+    		return true;
+    	}
+    	return false;
+    	
+    	
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton bBuscarProfesor;
     private javax.swing.JButton bRegistrarProfesor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

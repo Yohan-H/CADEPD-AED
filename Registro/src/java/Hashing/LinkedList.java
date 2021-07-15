@@ -1,24 +1,27 @@
 package Hashing;
+import EstructuraDatos.ListLinked.Node;
+
+
 
 public class LinkedList<T extends Comparable<T>>  {
 		int count ;
-		NodeList<T> first;
+		Node<T> first;
 		public LinkedList(){
-			first = new NodeList<T>(null,null);
+			first = new Node<T>(null,null);
 			count=0;
 		} 
 		public void initializeList(){
-			first = new NodeList<T>(null,null);
+			first = new Node<T>(null,null);
 			count=0;
 		}
 		public String search(T searchItem){
 			
-			NodeList<T> aux=first.getLink();
-			while (aux!=null && aux.getInfo().compareTo(searchItem) != 0 ) {
-				aux=aux.getLink();
+			Node<T> aux=first.getNext();
+			while (aux!=null && aux.getData().compareTo(searchItem) != 0 ) {
+				aux=aux.getNext();
 			}
-			if (aux!=null && aux.getInfo().compareTo(searchItem) == 0) {
-				return aux.getInfo().toString();
+			if (aux!=null && aux.getData().compareTo(searchItem) == 0) {
+				return aux.getData().toString();
 			}
 			return null;
 		}
@@ -26,13 +29,13 @@ public class LinkedList<T extends Comparable<T>>  {
 	    public void insert(T newItem)
 		{
 	    	if (search(newItem)==null) {
-	    	NodeList<T> aux=first;
+	    		Node<T> aux=first;
 	    	
-	    		while (aux.getLink()!=null && aux.getLink().getInfo().compareTo(newItem)<0) {
-	    			aux=aux.getLink();
+	    		while (aux.getNext()!=null && aux.getNext().getData().compareTo(newItem)<0) {
+	    			aux=aux.getNext();
 	    		}
-	    		NodeList<T> au = new NodeList<T>(newItem,aux.getLink());
-	    		aux.setLink(au);
+	    		Node<T> au = new Node<T>(newItem,aux.getNext());
+	    		aux.setNext(au);
 	    		count++;
 	    	}
 		}
@@ -43,30 +46,30 @@ public class LinkedList<T extends Comparable<T>>  {
 				return;
 			}
 			if (this.search(deleteItem) == null) {
-				this.first = this.first.getLink();
+				this.first = this.first.getNext();
 				this.count--;
 			}
 			else {
-				NodeList<T> aux=first;
-				while (aux.getLink() != null && aux.getLink().getInfo().compareTo(deleteItem) != 0) {
-					aux=aux.getLink();
+				Node<T> aux=first;
+				while (aux.getNext() != null && aux.getNext().getData().compareTo(deleteItem) != 0) {
+					aux=aux.getNext();
 				}
-				if (aux.getLink() != null) {
-					aux.setLink(aux.getLink().getLink());
+				if (aux.getNext() != null) {
+					aux.setNext(aux.getNext().getNext());
 					this.count--;
 				}
 			}
 
 		}
 		public boolean isEmpty(){
-			return (first.getLink() == null);
+			return (first.getNext() == null);
 		}
 		public String toString() {
 			String cadena="";
-			NodeList<T> aux = first.getLink();
+			Node<T> aux = first.getNext();
 			while(aux != null ) {
-				cadena += (aux.getInfo()+" ");
-				aux = aux.getLink();
+				cadena += (aux.getData()+" ");
+				aux = aux.getNext();
 			}
 			return cadena;
 		}

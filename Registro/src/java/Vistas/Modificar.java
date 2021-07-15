@@ -221,7 +221,7 @@ public class Modificar extends javax.swing.JPanel {
         //tfDNIBuscar.setText("");
         
         int dniBuscar = Integer.parseInt(tfDNIBuscar.getText());
-        BST alumno = Matricular.bst.searchDNI(dniBuscar);
+        BST alumno = Matricular.bstAlumnos.searchDNI(dniBuscar);
         
         String nombreCompleto = alumno.getData().getNombreCompleto();
         String primerApellido  = alumno.getData().getPrimerApellido();
@@ -267,12 +267,12 @@ public class Modificar extends javax.swing.JPanel {
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
         // TODO add your handling code here:
         int dniBuscar = Integer.parseInt(tfDNIBuscar.getText());
-        BST alumno = Matricular.bst.searchDNI(dniBuscar);
+        BST alumno = Matricular.bstAlumnos.searchDNI(dniBuscar);
         
         Alumno a = alumno.getData();
         
-        Matricular.bst.remove(a);
-        Matricular.bst.preOrden();
+        Matricular.bstAlumnos.remove(a);
+        Matricular.bstAlumnos.preOrden();
     }//GEN-LAST:event_bEliminarActionPerformed
 
     private void tfNombreCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombreCompletoActionPerformed
@@ -291,7 +291,7 @@ public class Modificar extends javax.swing.JPanel {
     private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
         // TODO add your handling code here:
         int dniBuscar = Integer.parseInt(tfDNIBuscar.getText());
-        BST alumno = Matricular.bst.searchDNI(dniBuscar);
+        BST alumno = Matricular.bstAlumnos.searchDNI(dniBuscar);
         
         String nombreCompleto = tfNombreCompleto.getText();
         String primerApellido = tfPrimerApellido.getText();
@@ -306,7 +306,7 @@ public class Modificar extends javax.swing.JPanel {
         alumno.setData(alumnoModificado);
         
         limpiarCasillas();
-        Matricular.bst.preOrden();
+        Matricular.bstAlumnos.preOrden();
     }//GEN-LAST:event_bModificarActionPerformed
 
 

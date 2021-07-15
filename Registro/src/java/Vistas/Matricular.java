@@ -8,7 +8,7 @@ import Clases.Alumno;
 import EstructuraDatos.BST.BST;
 import EstructuraDatos.ListLinked.ListLinked;
 import EstructuraDatos.ListLinked.Node;
-import Hashing.Hashing;
+import Hashing.HashingAlumnos;
 import Clases.CalificacionesMensuales;
 //import Vista.Prinicipal;
 import Vista.Notas;
@@ -23,11 +23,11 @@ import javax.swing.JOptionPane;
  */
 public class Matricular<E> extends javax.swing.JPanel {
 
-    public static BST bst = new BST();
+    public static BST bstAlumnos = new BST();
     public static ListLinked notas;
     
-    // HASHING EN EL PROYECTO
-    public static Hashing hashA = new Hashing(20,false); 
+    // HASHING PARA GUARDAR Y ORGANIZAR ALUMNOS
+    public static HashingAlumnos hashA = new HashingAlumnos(20,false); 
     
     /**
      * Creates new form Matricular
@@ -65,14 +65,14 @@ public class Matricular<E> extends javax.swing.JPanel {
         Alumno alumno7 = new Alumno("Kieran Matthew", "Berry", "Duke", 48239445, "992255960", "Apartado núm.: 158, 1519 Fringilla Avenida", notas);
         Alumno alumno8 = new Alumno("Francesca Felicia", "Dunn", "Lawrence", 41060179, "955851824", "Apdo.:326-5093 Mollis Av.", notas);
         
-        bst.insert(alumno1);
-        bst.insert(alumno2);
-        bst.insert(alumno3);
-        bst.insert(alumno4);
-        bst.insert(alumno5);
-        bst.insert(alumno6);
-        bst.insert(alumno7);
-        bst.insert(alumno8);
+        bstAlumnos.insert(alumno1);
+        bstAlumnos.insert(alumno2);
+        bstAlumnos.insert(alumno3);
+        bstAlumnos.insert(alumno4);
+        bstAlumnos.insert(alumno5);
+        bstAlumnos.insert(alumno6);
+        bstAlumnos.insert(alumno7);
+        bstAlumnos.insert(alumno8);
         
         //bst.preOrden();
     }
@@ -249,6 +249,7 @@ public class Matricular<E> extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfDireccionActionPerformed
 
+    
     private void bMatricularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMatricularActionPerformed
         
     	CalificacionesMensuales nota = new CalificacionesMensuales("", 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
@@ -294,8 +295,8 @@ public class Matricular<E> extends javax.swing.JPanel {
         //ArrayList<Object> notas = new ArrayList<Object>();
         
         Alumno alumno = new Alumno(nombreCompleto, primerApellido, segundoApellido, dni, celular, direccion, notas);
-        bst.insert(alumno);
-        bst.preOrden();
+        bstAlumnos.insert(alumno);
+        bstAlumnos.preOrden();
         
         hashA.insert(dni, nombreCompleto, primerApellido, segundoApellido, notas);
         System.out.println(hashA);
