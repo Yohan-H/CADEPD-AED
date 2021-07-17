@@ -26,7 +26,11 @@ public class BST<E> implements Comparable<BST>{
 	public BST() {
 		this.root = null;
 	}
+        public toString(){
+            return this.root;
+        }
 	
+
 	public Alumno getData() {
 		return data;
 	}

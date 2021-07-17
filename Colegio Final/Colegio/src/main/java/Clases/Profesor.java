@@ -2,7 +2,7 @@ package Clases;
 
 import java.util.*;
 
-public class Profesor extends Persona implements Comparable<Profesor> {
+public class Profesor implements Comparable<Profesor> {
     public String nombreCompleto;
     public String primerApellido;
     public String segundoApellido;
@@ -12,7 +12,6 @@ public class Profesor extends Persona implements Comparable<Profesor> {
     public String curso;
     
    public Profesor(String nombreCompleto, String primerApellido, String segundoApellido, int dni, String celular, String direccion, String curso) {
-       super(dni,nombreCompleto,primerApellido,segundoApellido);
        this.nombreCompleto = nombreCompleto;
        this.primerApellido = primerApellido;
        this.segundoApellido = segundoApellido;
@@ -22,12 +21,10 @@ public class Profesor extends Persona implements Comparable<Profesor> {
        this.curso = curso;
    }
    public Profesor(Profesor data){
-       super(0,"","Peru");
        this.nombreCompleto = data.getNombreCompleto();
    }
    
    public Profesor(int dni, String nombreCompleto, String primerApellido, String segundoApellido, String curso) {
-       super(dni,nombreCompleto,primerApellido,segundoApellido);
        this.dni = dni;
        this.nombreCompleto = nombreCompleto; 
        this.primerApellido = primerApellido;
